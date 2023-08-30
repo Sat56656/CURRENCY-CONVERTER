@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Currency Converter</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+  }
+  .converter {
+    background-color: #7e7c8d;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(110, 152, 59, 0.1);
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+  <div class="converter">
+    <h2>Currency Converter</h2>
+    <label for="amount">Enter Amount:</label>
+    <input type="number" id="amount" placeholder="Amount" step="0.01">
+    <br>
+    <label for="from">From Currency:</label>
+    <select id="from">
+      <option value="usd">USD</option>
+      <option value="eur">EUR</option>
+      <option value="gbp">GBP</option>
+    </select>
+    <br>
+    <label for="to">To Currency:</label>
+    <select id="to">
+      <option value="usd">USD</option>
+      <option value="eur">EUR</option>
+      <option value="gbp">GBP</option>
+    </select>
+    <br>
+    <button id="convertBtn">Convert</button>
+    <p id="result"></p>
+  </div>
+
+  <script>
+    document.getElementById("convertBtn").addEventListener("click", function() {
+      const amount = parseFloat(document.getElementById("amount").value);
+      const fromCurrency = document.getElementById("from").value;
+      const toCurrency = document.getElementById("to").value;
+      
+      // Conversion rates (you can use actual API for real-time rates)
+      const conversionRates = {
+        usd: {
+          eur: 0.85,
+          gbp: 0.73,
+          usd: 1
+        },
+        eur: {
+          usd: 1.18,
+          gbp: 0.85,
+          eur: 1
+        },
+        gbp: {
+          usd: 1.38,
+          eur: 1.18,
+          gbp: 1
+        }
+      };
+      
+      const convertedAmount = amount * conversionRates[fromCurrency][toCurrency];
+      document.getElementById("result").innerText = `Converted Amount: ${convertedAmount.toFixed(2)} ${toCurrency}`;
+    });
+  </script>
+</body>
+</html>
